@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Random Cards</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+        <style>
+            .content{
+                background-color: rgb(77, 187, 77);
+                border: 1px solid black;
+                /* Center vertically and horizontally */
+                position: absolute;
+                width: 1200px;
+                height: 60%;
+                top: 60%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            h1{
+                margin-top: 3em;
+            }
+            .card{
+                border: 2px solid black;
+                border-radius: 3%;
+                display: inline-block;
+                position: relative;
+                padding-right: 15px;
+                top: 5em;
+                margin-right: 5em;
+                left: 8em;
+                width: 10em;
+                height: 15em;
+                background-color: white;
+            }
+            .type{
+                float: right;
+                font-size: 35px;
+                margin-right: 1%;
+                margin-top: -2%
+            }
+            .number{
+            /* Center vertically and horizontally */
+            position: relative;
+            top: 40%;
+            left: 50%;
+            font-size: 36px;
+            font-weight: 800;
+            }
+            .bottom{
+                position: absolute;
+                bottom: 0;
+                display: block;
+                width: 100%;
+                border: none;
+                background-color: #c2c2c2;
+                line-height: 3rem;
+                font-size: 18px;
+                cursor: pointer;
+                text-align: center;
+            }
+        </style>
+    </head>
+<body style="font-family: 'Prompt', sans-serif;  background-color: rgb(160, 201, 132);">
+
+<center>
+    <h1>Random Cards</h1>
+</center>
+
+<div class="content" id="content">
+    
+        <button class="bottom" onclick="myFunction()">Click to Random</button>
+
+</div>
+
+<script>
+    var x = 4;
+    //function สร้างไพ่
+    const createcard =(amount)=>{
+        let i = 0;
+        while(i<amount){
+    const carddiv = document.createElement("div");
+    carddiv.setAttribute("id", `card${i+1}`)
+    carddiv.setAttribute("class", `card`)
+    
+    // Append to another element:
+    document.getElementById("content").appendChild(carddiv);
+
+    //เรียก function สร้างตัวเลขและโพ ค่าเริ่มต้นคือ "?"
+    insidecard(i+1)
+    i++
+        }
+    }
+    
+    //function สร้างตัวเลขและโพในไพ่ค่าเริ่มต้นคือ "?"
+    const insidecard =(id)=>{
+            const createspantype = document.createElement("span")
+            createspantype.setAttribute("id", `type${id}`)
+            createspantype.setAttribute("class", "type")
+            createspantype.innerHTML = "?"
+
+            const createspannumber = document.createElement("span")
+            createspannumber.setAttribute("id", `number${id}`)
+            createspannumber.setAttribute("class", "number")
+            createspannumber.innerHTML = "?"
+    
+            document.getElementById(`card${id}`).appendChild(createspantype);
+            document.getElementById(`card${id}`).appendChild(createspannumber);
+            
+    }
+    
+    //สร้างไพ่ 4ใบ
+    createcard(x)
+    
+
+    const myFunction =()=> {
+    
+      // card number and type
+    var CARD_TYPE = ['♣', '♦', '♥', '♠']
+    var CARD_NUMBER = ['A', '2', '3', '4', '5', '6',' 7', '8', '9', '10', 'J', 'Q', 'K']
+    
+    // random function
+    // max: number > 0
+    // return [0, max -1]
+    function random(max) {
+       return parseInt(Math.random() * max) % max
+    }
+    
+    // random function
+    const randcard =(amount)=>{
+        let i = 0;
+        var cardType = [];
+        var cardNumber = [];
+    
+        while(i<amount){
+            //random
+            cardType[i] = CARD_TYPE[random(CARD_TYPE.length)]
+            cardNumber[i] = CARD_NUMBER[random(CARD_NUMBER.length)]
+            //after random type and number send data to display function
+            display(i+1, cardType[i], cardNumber[i])
+            i++
+        }   
+        
+    }
+    
+    //set number type and color
+    const display =(id , type, number)=>{
+         if(type == "♦" || type == "♥"){
+            document.getElementById(`type${id}`).innerHTML = type;
+            document.getElementById(`number${id}`).innerHTML = number;
+            document.getElementById(`card${id}`).style.borderColor = "red"
+            document.getElementById(`type${id}`).style.color = "red"
+            document.getElementById(`number${id}`).style.color = "red"
+         }else{
+            document.getElementById(`type${id}`).innerHTML = type;
+            document.getElementById(`number${id}`).innerHTML = number;
+            document.getElementById(`card${id}`).style.borderColor = "black"
+            document.getElementById(`type${id}`).style.color = "black"
+            document.getElementById(`number${id}`).style.color = "black"
+         }
+    }
+    
+    //สุ่มไพ่ xใบ กำหนดตอนแรก
+    randcard(x)
+    
+    }
+    </script>
+
+</body>
+</html>
