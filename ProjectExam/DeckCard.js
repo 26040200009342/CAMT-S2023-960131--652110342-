@@ -43,7 +43,10 @@ function shuffleArray(array) {
   return array;
 }
 
-console.log(cardList);
+function starterDeck(){
+  storgeCard()// เก็บค่าใน cardList
+  shuffleArray(cardList)//เอาค่ามาสลับ
+}
 
 
 //drop zone//
