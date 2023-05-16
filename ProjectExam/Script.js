@@ -63,11 +63,34 @@ function handCardList(){
   var handCard = [];
 }
 
-function deckToHand(){
-  for (let i = 0; i < player; i++) {
-
+const players = [
+    { name: 'Player 1', hand: [] },
+    { name: 'Player 2', hand: [] },
+    // Add more players as needed
+  ];
+  
+  function giveCardToPlayer(player) {
+    const cardIndex = Math.floor(Math.random() * deck.length);
+    const card = deck.splice(cardIndex, 1)[0];
+    player.hand.push(card);
   }
-}
+  
+  function distributeCardsToPlayers() {
+    for (let i = 0; i < players.length; i++) {
+      for (let j = 0; j < numberOfCardsPerPlayer; j++) {
+        giveCardToPlayer(players[i]);
+      }
+    }
+  }
+  
+  // Call the distributeCardsToPlayers function to distribute cards to all players
+  distributeCardsToPlayers();
+  
+  // Print the hands of each player
+  for (let i = 0; i < players.length; i++) {
+    console.log(`${players[i].name}:`, players[i].hand);
+  }
+  
 function pickCardFromDeck(){
 
 }
