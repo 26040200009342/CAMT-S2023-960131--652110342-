@@ -62,7 +62,7 @@ function playerAmount(amount){
 function handCardList(){
   var handCard = [];
 }
-
+// all this about player get Card
 const players = [
     { name: 'Player 1', hand: [] },
     { name: 'Player 2', hand: [] },
@@ -91,16 +91,21 @@ const players = [
     console.log(`${players[i].name}:`, players[i].hand);
   }
   
-function pickCardFromDeck(){
 
-}
 
 function pickCardFromDrop(){
 
 }
 
 function dropCard(){
-
+  var cardDrop = [];
+  // set dorp
+  for (var i =0 ; i < cardDrop.length ; i++){
+      if(cardDrop == i){
+        cardDrop = ture
+      }
+  }
+  // show cardDrop
 }
 
 // play zone //
