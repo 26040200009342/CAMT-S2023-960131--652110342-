@@ -1,3 +1,4 @@
+// Card deck //
 var CARD_TYPE = ["♣", "♦", "♥", "♠"];
 var CARD_NUMBER = [
   "A",
@@ -43,3 +44,37 @@ function shuffleArray(array) {
 }
 
 console.log(cardList);
+
+
+//drop zone//
+function listDropCard(){
+  var cardList = [];
+}
+
+//player zone//
+var player
+function playerAmount(amount){
+  player = amount
+}
+function handCardList(){
+  var handCard = [];
+}
+
+function deckToHand(){
+  for (let i = 0; i < player; i++) {
+
+  }
+}
+function pickCardFromDeck(){
+
+}
+
+function pickCardFromDrop(){
+
+}
+
+function dropCard(){
+
+}
+
+// play zone //
