@@ -66,6 +66,9 @@ function handCardList(){
 const players = [
     { name: 'Player 1', hand: [] },
     { name: 'Player 2', hand: [] },
+    { name: 'Player 3', hand: [] },
+    { name: 'Player 4', hand: [] },
+    { name: 'Player 5', hand: [] }
     // Add more players as needed
   ];
   
