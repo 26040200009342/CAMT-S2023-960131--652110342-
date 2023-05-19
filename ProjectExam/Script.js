@@ -1,4 +1,4 @@
-// Card deck //
+// Card deck
 var CARD_TYPE = ["♣", "♦", "♥", "♠"];
 var CARD_NUMBER = [
   "A",
@@ -7,7 +7,7 @@ var CARD_NUMBER = [
   "4",
   "5",
   "6",
-  " 7",
+  "7",
   "8",
   "9",
   "10",
@@ -30,85 +30,68 @@ function storgeCard() {
 }
 
 function shuffleArray(array) {
-  // Loop through the array backwards from the last element to the second element
   for (let i = array.length - 1; i > 0; i--) {
-    // Generate a random index between 0 and i (inclusive)
     const j = Math.floor(Math.random() * (i + 1));
-
-    // Swap the values at indices i and j using destructuring assignment
     [array[i], array[j]] = [array[j], array[i]];
   }
-
-  // Return the shuffled array
   return array;
 }
 
-function starterDeck(){
-  storgeCard()// เก็บค่าใน cardList
-  shuffleArray(cardList)//เอาค่ามาสลับ
-}
+var numOfPlayers = 5; // Number of player before start game
+var playerIndex = 0; // Index of player for giving card
+var allPlayers = []; // All player are here
 
-
-//drop zone//
-function listDropCard(){
-  var cardList = [];
-}
-
-//player zone//
-var player
-function playerAmount(amount){
-  player = amount
-}
-function handCardList(){
-  var handCard = [];
-}
-// all this about player get Card
-const players = [
-    { name: 'Player 1', hand: [] },
-    { name: 'Player 2', hand: [] },
-    { name: 'Player 3', hand: [] },
-    { name: 'Player 4', hand: [] },
-    { name: 'Player 5', hand: [] }
-    // Add more players as needed
-  ];
-  
-  function giveCardToPlayer(player) {
-    const cardIndex = Math.floor(Math.random() * deck.length);
-    const card = deck.splice(cardIndex, 1)[0];
-    player.hand.push(card);
+function dealCards() {
+  // Give card to all player but don't show yet
+  allPlayers = []; // Make sure it's empty
+  for (var i = 0; i < numOfPlayers; i++) {
+    var player = {
+      name: "Player " + (i + 1), // Player number
+      hand: [], // Player hand is empty
+    };
+    allPlayers.push(player); // Add player to all player
   }
-  
-  function distributeCardsToPlayers() {
-    for (let i = 0; i < players.length; i++) {
-      for (let j = 0; j < numberOfCardsPerPlayer; j++) {
-        giveCardToPlayer(players[i]);
+
+  var cardsToDeal = numOfPlayers * 5;
+  for (var i = 0; i < cardsToDeal; i++) {
+    var currentPlayer = allPlayers[playerIndex];
+    if (cardList.length > 0) {
+      // If deck is not empty
+      var card = cardList.pop(); // Get 1 card from deck
+      currentPlayer.hand.push(card); // Give it to the current player
+
+      // Generate HTML for the card only when i is equal to 0
+      if (i < 5) {
+        var cardHTML = `
+          <div class="card-mainplay">
+            <div class="card-number">
+              ${card.value[1]}
+            </div>
+            <div class="card-body">
+              <div class="card-pic1">
+                <div class="card-title">
+                  ${card.value[0]}
+                </div>
+              </div>
+              <div class="card-pic2">
+                <div class="card-title">
+                  ${card.value[0]}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // Append the card HTML to the show-card div
+        document.getElementById("show-card").innerHTML += cardHTML;
       }
     }
+    playerIndex = (playerIndex + 1) % numOfPlayers;
   }
-  
-  // Call the distributeCardsToPlayers function to distribute cards to all players
-  distributeCardsToPlayers();
-  
-  // Print the hands of each player
-  for (let i = 0; i < players.length; i++) {
-    console.log(`${players[i].name}:`, players[i].hand);
-  }
-  
-
-
-function pickCardFromDrop(){
-
 }
-
-function dropCard(){
-  var cardDrop = [];
-  // set dorp
-  for (var i =0 ; i < cardDrop.length ; i++){
-      if(cardDrop == i){
-        cardDrop = ture
-      }
-  }
-  // show cardDrop
-}
-
-// play zone //
+window.addEventListener('load', function() {
+  // Call the dealCards function here
+  storgeCard();
+  shuffleArray(cardList);
+  dealCards();
+});
