@@ -42,7 +42,8 @@ var playerIndex = 0; // Index of player for giving card
 var allPlayers = []; // All player are here
 
 function dealCards() {
-  // Give card to all player but don't show yet
+  // Give card to all player
+  // Give 5 cards to 1 player at a time
   allPlayers = []; // Make sure it's empty
   for (var i = 0; i < numOfPlayers; i++) {
     var player = {
@@ -50,46 +51,92 @@ function dealCards() {
       hand: [], // Player hand is empty
     };
     allPlayers.push(player); // Add player to all player
-  }
+    //Finished create player
 
-  var cardsToDeal = numOfPlayers * 5;
-  for (var i = 0; i < cardsToDeal; i++) {
-    var currentPlayer = allPlayers[playerIndex];
-    if (cardList.length > 0) {
-      // If deck is not empty
-      var card = cardList.pop(); // Get 1 card from deck
-      currentPlayer.hand.push(card); // Give it to the current player
+    // Start giving card
+    var cardsToDeal = 5;
+    for (var j = 0; j < cardsToDeal; j++) {
+      if (cardList.length > 0) {
+        // If deck is not empty
+        var card = cardList.pop(); // Get 1 card from deck
+        player.hand.push(card); // Give it to the current player
 
-      // Generate HTML for the card only when i is equal to 0
-      if (i < 5) {
-        var cardHTML = `
-          <div class="card-mainplay">
-            <div class="card-number">
-              ${card.value[1]}
-            </div>
-            <div class="card-body">
-              <div class="card-pic1">
-                <div class="card-title">
-                  ${card.value[0]}
+        // Give 5 card to start with to only the first player
+        if (j < 5 && i === 0) {
+          var cardHTML = `
+            <div class="card-mainplay">
+              <div class="card-number">
+                ${card.value[1]}
+              </div>
+              <div class="card-body">
+                <div class="card-pic1">
+                  <div class="card-title">
+                    ${card.value[0]}
+                  </div>
+                </div>
+                <div class="card-pic2">
+                  <div class="card-title">
+                    ${card.value[0]}
+                  </div>
                 </div>
               </div>
-              <div class="card-pic2">
-                <div class="card-title">
-                  ${card.value[0]}
-                </div>
-              </div>
             </div>
-          </div>
-        `;
+          `;
 
-        // Append the card HTML to the show-card div
-        document.getElementById("show-card").innerHTML += cardHTML;
+          // Append the card HTML to the show-card div
+          document.getElementById("show-card").innerHTML += cardHTML;
+        }
       }
+      // Check if all card has been given
+      console.log(i, j, card);
     }
-    playerIndex = (playerIndex + 1) % numOfPlayers;
   }
 }
-window.addEventListener('load', function() {
+
+// Function to handle getting another card from the deck
+function getAnotherCard() {
+  // Get the current player
+  var currentPlayer = allPlayers[playerIndex];
+
+  // Check if the deck has cards remaining and if card on hand more than 6
+  if (cardList.length > 0 && currentPlayer.hand.length < 6) {
+    // Get a card from the deck
+    var card = cardList.pop();
+
+    // Add the card to the current player's hand
+    currentPlayer.hand.push(card);
+
+    // Generate HTML for the card
+    var cardHTML = `
+      <div class="card-mainplay">
+        <div class="card-number">
+          ${card.value[1]}
+        </div>
+        <div class="card-body">
+          <div class="card-pic1">
+            <div class="card-title">
+              ${card.value[0]}
+            </div>
+          </div>
+          <div class="card-pic2">
+            <div class="card-title">
+              ${card.value[0]}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Append the card HTML to the show-card div
+    document.getElementById("show-card").innerHTML += cardHTML;
+  } else {
+    window.alert("Maximum Card");
+  }
+  // Check if all card has been given
+  console.log(card);
+}
+
+window.addEventListener("load", function () {
   // Call the dealCards function here
   storgeCard();
   shuffleArray(cardList);
