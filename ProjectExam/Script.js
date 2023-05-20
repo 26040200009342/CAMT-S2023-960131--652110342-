@@ -94,9 +94,10 @@ function dealCards() {
 }
 
 // Function to handle getting another card from the deck
-function getAnotherCard() {
+// mainPlayerPosition should be 0
+function getAnotherCardMainPlayer(mainPlayerPosition) {
   // Get the current player
-  var currentPlayer = allPlayers[playerIndex];
+  var currentPlayer = allPlayers[mainPlayerPosition];
 
   // Check if the deck has cards remaining and if card on hand more than 6
   if (cardList.length > 0 && currentPlayer.hand.length < 6) {
@@ -106,34 +107,63 @@ function getAnotherCard() {
     // Add the card to the current player's hand
     currentPlayer.hand.push(card);
 
+    // Only 1 player show
     // Generate HTML for the card
     var cardHTML = `
-      <div class="card-mainplay">
-        <div class="card-number">
-          ${card.value[1]}
-        </div>
-        <div class="card-body">
-          <div class="card-pic1">
-            <div class="card-title">
-              ${card.value[0]}
+        <div class="card-mainplay">
+          <div class="card-number">
+            ${card.value[1]}
+          </div>
+          <div class="card-body">
+            <div class="card-pic1">
+              <div class="card-title">
+                ${card.value[0]}
+              </div>
+            </div>
+            <div class="card-pic2">
+              <div class="card-title">
+                ${card.value[0]}
+              </div>
             </div>
           </div>
-          <div class="card-pic2">
-            <div class="card-title">
-              ${card.value[0]}
-            </div>
-          </div>
         </div>
-      </div>
-    `;
-
+      `;
     // Append the card HTML to the show-card div
     document.getElementById("show-card").innerHTML += cardHTML;
   } else {
     window.alert("Maximum Card");
   }
-  // Check if all card has been given
-  console.log(card);
+  // Check if main player card has been given
+  console.log("Main Player: " + card);
+}
+
+//botPlayerPosition should be 2-5
+function getAnotherCardBot(botPlayerPosition) {
+  // Get the current player
+  var currentPlayer = allPlayers[botPlayerPosition];
+
+  if (cardList.length > 0 && currentPlayer.hand.length < 6) {
+    // Get a card from the deck
+    var card = cardList.pop();
+
+    // Add the card to the current player's hand
+    currentPlayer.hand.push(card);
+  } else {
+    console.log("Bot" + botPlayerPosition + "Maximum Card");
+  }
+  console.log("Bot" + botPlayerPosition + " Player: " + card.value[0] + card.value[1]);
+}
+
+function getAnotherCard() {
+  for (var i = 0; i < numOfPlayers; i++) {
+    if (i === 0) {
+      // if first player
+      getAnotherCardMainPlayer(i);
+    } else if (i > 0 && i < numOfPlayers) {
+      // if bot
+      getAnotherCardBot(i);
+    }
+  }
 }
 
 window.addEventListener("load", function () {
