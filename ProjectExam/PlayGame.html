@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +9,9 @@
 
     <title>play game</title>
 </head>
+
 <body>
+    <script src="Script.js"></script>
     <div class="container-game">
         <div class="container-head">
             <div class="score">
@@ -28,21 +31,21 @@
                         <div class="card-body">
                             <div class="card-pic1">
                                 <div class="card-title">
-                                    ♣ 
+                                    ♣
                                 </div>
                             </div>
                             <div class="card-pic2">
                                 <div class="card-title">
-                                    ♣ 
+                                    ♣
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="text-border">
-                    Joke
+                        Joke
+                    </div>
                 </div>
-                </div>
-                
+
             </div>
         </div>
         <div class="container-board">
@@ -276,7 +279,7 @@
             </div>
             <div class="board-content">
                 <div class="deck-card">
-                    <img src="image/deck-card.png">
+                    <img id="deck-image" src="image/deck-card.png" onclick="getAnotherCard()">
                 </div>
                 <div class="drop-card-zone">
                     <!---------------------------------------------------------------------->
@@ -287,12 +290,12 @@
                         <div class="card-body">
                             <div class="card-pic1">
                                 <div class="card-title">
-                                    ♣ 
+                                    ♣
                                 </div>
                             </div>
                             <div class="card-pic2">
                                 <div class="card-title">
-                                    ♣ 
+                                    ♣
                                 </div>
                             </div>
                         </div>
@@ -304,12 +307,12 @@
                         <div class="card-body">
                             <div class="card-pic1">
                                 <div class="card-title">
-                                    ♣ 
+                                    ♣
                                 </div>
                             </div>
                             <div class="card-pic2">
                                 <div class="card-title">
-                                    ♣ 
+                                    ♣
                                 </div>
                             </div>
                         </div>
@@ -321,12 +324,12 @@
                         <div class="card-body">
                             <div class="card-pic1">
                                 <div class="card-title">
-                                    ♣ 
+                                    ♣
                                 </div>
                             </div>
                             <div class="card-pic2">
                                 <div class="card-title">
-                                    ♣ 
+                                    ♣
                                 </div>
                             </div>
                         </div>
@@ -338,109 +341,8 @@
             
         </div>
         <div class="main-player">
-            <div class="show-card">
-                <div class="card-mainplay">
-                    <div class="card-number">
-                        A
-                    </div>
-                    <div class="card-body">
-                        <div class="card-pic1">
-                            <div class="card-title">
-                                ♣ 
-                            </div>
-                        </div>
-                        <div class="card-pic2">
-                            <div class="card-title">
-                                ♣ 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-mainplay">
-                    <div class="card-number">
-                        A
-                    </div>
-                    <div class="card-body">
-                        <div class="card-pic1">
-                            <div class="card-title">
-                                ♣ 
-                            </div>
-                        </div>
-                        <div class="card-pic2">
-                            <div class="card-title">
-                                ♣ 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-mainplay">
-                    <div class="card-number">
-                        A
-                    </div>
-                    <div class="card-body">
-                        <div class="card-pic1">
-                            <div class="card-title">
-                                ♣ 
-                            </div>
-                        </div>
-                        <div class="card-pic2">
-                            <div class="card-title">
-                                ♣ 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-mainplay">
-                    <div class="card-number">
-                        A
-                    </div>
-                    <div class="card-body">
-                        <div class="card-pic1">
-                            <div class="card-title">
-                                ♣ 
-                            </div>
-                        </div>
-                        <div class="card-pic2">
-                            <div class="card-title">
-                                ♣ 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-mainplay">
-                    <div class="card-number">
-                        A
-                    </div>
-                    <div class="card-body">
-                        <div class="card-pic1">
-                            <div class="card-title">
-                                ♣ 
-                            </div>
-                        </div>
-                        <div class="card-pic2">
-                            <div class="card-title">
-                                ♣ 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-mainplay">
-                    <div class="card-number">
-                        A
-                    </div>
-                    <div class="card-body">
-                        <div class="card-pic1">
-                            <div class="card-title">
-                                ♣ 
-                            </div>
-                        </div>
-                        <div class="card-pic2">
-                            <div class="card-title">
-                                ♣ 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="show-card" id="show-card">
+                <!--The card will be add from JS-->
             </div>
             <div class="main-player-info">
                 <div class="player-main-block">
@@ -452,4 +354,5 @@
         </div>
     </div>
 </body>
+
 </html>
