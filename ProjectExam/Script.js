@@ -37,7 +37,9 @@ function shuffleArray(array) {
   return array;
 }
 
-var numOfPlayers = 5; // Number of player before start game
+// numOfPlayer was created here
+// Retrieve numOfPlayers from localStorage
+var numOfPlayers = localStorage.getItem("numOfPlayers");
 var playerIndex = 0; // Index of player for giving card
 var allPlayers = []; // All player are here
 
@@ -51,6 +53,26 @@ function dealCards() {
       hand: [], // Player hand is empty
     };
     allPlayers.push(player); // Add player to all player
+
+    if (i > 0 && i < numOfPlayers) {
+      var botHTML = `
+        <div class="player-block" id="player-block-${i}"><!--player bot-->
+          <div class="circle-pic">
+            <div class="player">
+              <img src="image/1.png">
+            </div> 
+          </div>
+          <div class="card-bot">
+            <div class="show-card-bot" id="show-card-bot-${i}"><!--Card bot on hand-->
+
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("player-zone").innerHTML += botHTML;
+    }
+
     //Finished create player
 
     // Start giving card
@@ -85,6 +107,30 @@ function dealCards() {
 
           // Append the card HTML to the show-card div
           document.getElementById("show-card").innerHTML += cardHTML;
+        } else if (j < 5 && i > 0 && i < numOfPlayers) {
+          var botHTML = `
+            <div class="card-bot-play">
+
+              <div class="card-number-bot">
+                ${card.value[1]}
+              </div>
+              <div class="card-body-bot">
+                <div class="card-pic1-bot">
+                  <div class="card-title">
+                    ${card.value[0]} 
+                  </div>
+                </div>
+              <div class="card-pic2-bot">
+                  <div class="card-title">
+                    ${card.value[0]} 
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          `;
+          // Append the card HTML to the show-card-bot div
+          document.getElementById(`show-card-bot-${i}`).innerHTML += botHTML;
         }
       }
       // Check if all card has been given
@@ -145,11 +191,33 @@ function getAnotherCardBot(botPlayerPosition) {
   if (cardList.length > 0 && currentPlayer.hand.length < 6) {
     // Get a card from the deck
     var card = cardList.pop();
-
     // Add the card to the current player's hand
     currentPlayer.hand.push(card);
-    
-    console.log("Bot" + botPlayerPosition + " Player: " + card.value[0] + card.value[1]);
+
+    var botHTML = `
+            <div class="card-bot-play">
+
+              <div class="card-number-bot">
+                ${card.value[1]}
+              </div>
+              <div class="card-body-bot">
+                <div class="card-pic1-bot">
+                  <div class="card-title">
+                    ${card.value[0]} 
+                  </div>
+                </div>
+              <div class="card-pic2-bot">
+                  <div class="card-title">
+                    ${card.value[0]} 
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          `;
+
+    document.getElementById(`show-card-bot-${botPlayerPosition}`).innerHTML +=
+      botHTML;
   } else {
     console.log("Bot" + botPlayerPosition + "Maximum Card");
   }
