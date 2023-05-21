@@ -148,10 +148,11 @@ function getAnotherCardBot(botPlayerPosition) {
 
     // Add the card to the current player's hand
     currentPlayer.hand.push(card);
+    
+    console.log("Bot" + botPlayerPosition + " Player: " + card.value[0] + card.value[1]);
   } else {
     console.log("Bot" + botPlayerPosition + "Maximum Card");
   }
-  console.log("Bot" + botPlayerPosition + " Player: " + card.value[0] + card.value[1]);
 }
 
 function getAnotherCard() {
