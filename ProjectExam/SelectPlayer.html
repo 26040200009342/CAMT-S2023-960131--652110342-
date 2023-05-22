@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +10,9 @@
 
     <title>select-player</title>
 </head>
+
 <body>
+    <script src="SelectPlayerScript.js"></script>
     <div class="container-bg">
         <div class="support-bg">
             <img src="image/bg_support.png">
@@ -34,48 +37,46 @@
         <div class="select-player-checkbox">
             <div class="checkbox">
                 <label class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" />
+                    <input type="checkbox" id="checkbox-2" class="checkbox-input" value="2" />
                     <span class="checkbox-tile">
-                        <span class="checkbox-label">2 People</span>
+                        <span class="checkbox-label">2 Players</span>
                     </span>
                 </label>
             </div>
             <div class="checkbox">
                 <label class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" />
+                    <input type="checkbox" id="checkbox-3" class="checkbox-input" value="3" />
                     <span class="checkbox-tile">
-                        <span class="checkbox-label">3 People</span>
+                        <span class="checkbox-label">3 Players</span>
                     </span>
                 </label>
             </div>
             <div class="checkbox">
                 <label class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" />
+                    <input type="checkbox" id="checkbox-4" class="checkbox-input" value="4" />
                     <span class="checkbox-tile">
-                        <span class="checkbox-icon">
-                            
-                        </span>
-                        <span class="checkbox-label">4 People</span>
+                        <span class="checkbox-icon"></span>
+                        <span class="checkbox-label">4 Players</span>
                     </span>
                 </label>
             </div>
             <div class="checkbox">
                 <label class="checkbox-wrapper">
-                    <input type="checkbox" class="checkbox-input" />
+                    <input type="checkbox" id="checkbox-5" class="checkbox-input" value="5" />
                     <span class="checkbox-tile">
-                        <span class="checkbox-icon">
-                            
-                        </span>
-                        <span class="checkbox-label">5 People</span>
+                        <span class="checkbox-icon"></span>
+                        <span class="checkbox-label">5 Players</span>
                     </span>
                 </label>
             </div>
         </div>
+
         <div class="button-zone">
-            <div class="button-slp" id="back"><a href="#">Back</a></div>
-            <div class="button-slp" id="next"><a href="#">Next</a></div>
+            <div class="button-slp" id="back"><a href="Home.html">Back</a></div>
+            <div class="button-slp" id="next"><a onclick="updateNumOfPlayers()">Next</a></div>
         </div>
-       
+
     </div>
 </body>
+
 </html>
