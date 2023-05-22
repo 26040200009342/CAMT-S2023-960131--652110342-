@@ -76,40 +76,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-drop">
-                        <div class="card-number">
-                            A
-                        </div>
-                        <div class="card-body">
-                            <div class="card-pic1">
-                                <div class="card-title">
-                                    ♣
-                                </div>
-                            </div>
-                            <div class="card-pic2">
-                                <div class="card-title">
-                                    ♣
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-drop">
-                        <div class="card-number">
-                            A
-                        </div>
-                        <div class="card-body">
-                            <div class="card-pic1">
-                                <div class="card-title">
-                                    ♣
-                                </div>
-                            </div>
-                            <div class="card-pic2">
-                                <div class="card-title">
-                                    ♣
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <!---------------------------------------------------------------------->
                 </div>
             </div>
@@ -117,8 +84,17 @@
             
         </div>
         <div class="main-player">
-            <div class="show-card" id="show-card">
+            <div class="show-card" id="show-card" >
                 <!--The card will be add from JS-->
+                <script>
+                    // Add event listeners to each card in the hand
+                    var handCards = document.querySelectorAll('.show-card .card-drop');
+                    handCards.forEach(function(card) {
+                      card.addEventListener('click', function() {
+                        dropCard(card);
+                      });
+                    });
+                  </script>
                 
             </div>
             <div class="main-player-info">

@@ -240,4 +240,40 @@ window.addEventListener("load", function () {
   storgeCard();
   shuffleArray(cardList);
   dealCards();
+
+  // Add event listeners to each card in the hand
+  var handCards = document.querySelectorAll('.show-card .card-mainplay');
+  handCards.forEach(function (card) {
+    card.addEventListener('click', function () {
+      dropCard(card);
+    });
+  });
 });
+
+//---------------------------------------------------------//
+
+// version 1
+
+ /*function dropCard(){
+  
+  // Get the card element from show-card
+  var card = document.getElementById('show-card').firstElementChild
+
+  // Remove the card from show-card
+  document.getElementById('show-card').innerHTML = ''
+
+  // Add the card to drop-card-zone
+  document.querySelector('.drop-card-zone').appendChild(card)
+}*/
+
+function dropCard(cardElement) {
+  // Remove the card from current parent element
+  cardElement.parentNode.removeChild(cardElement);
+
+  // Add the card to drop-card-zone
+  document.querySelector('.drop-card-zone').appendChild(cardElement);
+}
+
+
+
+
