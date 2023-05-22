@@ -17,6 +17,7 @@ var CARD_NUMBER = [
 ];
 
 var cardList = [];
+var cardDrop = [];
 
 function storgeCard() {
   for (var i = 0; i < CARD_TYPE.length; i++) {
@@ -42,10 +43,11 @@ function shuffleArray(array) {
 var numOfPlayers = localStorage.getItem("numOfPlayers");
 var playerIndex = 0; // Index of player for giving card
 var allPlayers = []; // All player are here
+var CARD_TO_DEAL = 5;
 
-function dealCards() {
-  // Give card to all player
-  // Give 5 cards to 1 player at a time
+var indexPlayerTurn = 0;
+
+function createPlayer() {
   allPlayers = []; // Make sure it's empty
   for (var i = 0; i < numOfPlayers; i++) {
     var player = {
@@ -53,62 +55,83 @@ function dealCards() {
       hand: [], // Player hand is empty
     };
     allPlayers.push(player); // Add player to all player
+  }
+  //Finished create player
+}
 
-    if (i > 0 && i < numOfPlayers) {
-      var botHTML = `
-        <div class="player-block" id="player-block-${i}"><!--player bot-->
-          <div class="circle-pic">
-            <div class="player">
-              <img src="image/1.png">
-            </div> 
-          </div>
-          <div class="card-bot">
-            <div class="show-card-bot" id="show-card-bot-${i}"><!--Card bot on hand-->
+// Main Player already existed //
 
+// Create Bot
+function createBot() {
+  for (var i = 1; i < numOfPlayers; i++) {
+    // Start from 1 because 0 is main player
+    var botHTML = `
+          <div class="player-block" id="player-block-${i}"><!--player bot-->
+            <div class="circle-pic">
+              <div class="player">
+                <img src="image/1.png">
+              </div> 
+            </div>
+            <div class="card-bot">
+              <div class="show-card-bot" id="show-card-bot-${i}"><!--Card bot on hand-->
+  
+              </div>
             </div>
           </div>
-        </div>
-      `;
+        `;
 
-      document.getElementById("player-zone").innerHTML += botHTML;
+    document.getElementById("player-zone").innerHTML += botHTML;
+  }
+}
+
+function dealCardsMainPlayer() {
+  indexPlayerTurn = 0;
+  for (var i = 0; i < CARD_TO_DEAL; i++) {
+    if (cardList.length > 0) {
+      // If deck is not empty
+
+      var card = cardList.pop(); // Get 1 card from deck
+      allPlayers[indexPlayerTurn].hand.push(card); // Give it to the current player
+
+      var cardHTML = `
+          <div class="card-mainplay">
+            <div class="card-number">
+              ${card.value[1]}
+            </div>  
+            <div class="card-body">
+              <div class="card-pic1">
+                <div class="card-title">
+                  ${card.value[0]}
+                </div>
+              </div>
+              <div class="card-pic2">
+                <div class="card-title">
+                  ${card.value[0]}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+      // Append the card HTML to the show-card div
+      document.getElementById("show-card").innerHTML += cardHTML;
+      console.log(
+        "Main player : " + indexPlayerTurn + card.value[0] + card.value[1]
+      );
     }
+  }
+  indexPlayerTurn++; // Move to other player turn
+}
 
-    //Finished create player
+function dealCardsBotPlayer() {
+  for (var i = 0; i < CARD_TO_DEAL; i++) {
+    if (cardList.length > 0) {
+      // If deck is not empty
 
-    // Start giving card
-    var cardsToDeal = 5;
-    for (var j = 0; j < cardsToDeal; j++) {
-      if (cardList.length > 0) {
-        // If deck is not empty
-        var card = cardList.pop(); // Get 1 card from deck
-        player.hand.push(card); // Give it to the current player
+      var card = cardList.pop(); // Get 1 card from deck
+      allPlayers[indexPlayerTurn].hand.push(card); // Give it to the current player
 
-        // Give 5 card to start with to only the first player
-        if (j < 5 && i === 0) {
-          var cardHTML = `
-            <div class="card-mainplay">
-              <div class="card-number">
-                ${card.value[1]}
-              </div>
-              <div class="card-body">
-                <div class="card-pic1">
-                  <div class="card-title">
-                    ${card.value[0]}
-                  </div>
-                </div>
-                <div class="card-pic2">
-                  <div class="card-title">
-                    ${card.value[0]}
-                  </div>
-                </div>
-              </div>
-            </div>
-          `;
-
-          // Append the card HTML to the show-card div
-          document.getElementById("show-card").innerHTML += cardHTML;
-        } else if (j < 5 && i > 0 && i < numOfPlayers) {
-          var botHTML = `
+      var botHTML = `
             <div class="card-bot-play">
 
               <div class="card-number-bot">
@@ -129,64 +152,64 @@ function dealCards() {
 
             </div>
           `;
-          // Append the card HTML to the show-card-bot div
-          document.getElementById(`show-card-bot-${i}`).innerHTML += botHTML;
-        }
-      }
-      // Check if all card has been given
-      console.log(i, j, card);
+      // Append the card HTML to the show-card-bot div
+      document.getElementById(`show-card-bot-${indexPlayerTurn}`).innerHTML +=
+        botHTML;
+      console.log("Bot : " + indexPlayerTurn + card.value[0] + card.value[1]);
     }
   }
+  indexPlayerTurn++; // Move to other player turn
 }
 
 // Function to handle getting another card from the deck
-// mainPlayerPosition should be 0
-function getAnotherCardMainPlayer(mainPlayerPosition) {
-  // Get the current player
-  var currentPlayer = allPlayers[mainPlayerPosition];
-
+// indexPlayerTurn should be 0
+function getAnotherCardMainPlayer() {
+  indexPlayerTurn = 0;
   // Check if the deck has cards remaining and if card on hand more than 6
-  if (cardList.length > 0 && currentPlayer.hand.length < 6) {
+  if (cardList.length > 0 && allPlayers[0].hand.length < 6) {
     // Get a card from the deck
     var card = cardList.pop();
 
     // Add the card to the current player's hand
-    currentPlayer.hand.push(card);
+    allPlayers[0].hand.push(card);
 
     // Only 1 player show
     // Generate HTML for the card
     var cardHTML = `
-        <div class="card-mainplay">
-          <div class="card-number">
-            ${card.value[1]}
-          </div>
-          <div class="card-body">
-            <div class="card-pic1">
-              <div class="card-title">
-                ${card.value[0]}
-              </div>
+      <div class="card-mainplay">
+        <div class="card-number">
+          ${card.value[1]}
+        </div>  
+        <div class="card-body">
+          <div class="card-pic1">
+            <div class="card-title">
+              ${card.value[0]}
             </div>
-            <div class="card-pic2">
-              <div class="card-title">
-                ${card.value[0]}
-              </div>
+          </div>
+          <div class="card-pic2">
+            <div class="card-title">
+              ${card.value[0]}
             </div>
           </div>
         </div>
+      </div>
       `;
     // Append the card HTML to the show-card div
     document.getElementById("show-card").innerHTML += cardHTML;
+    // Check if main player card has been given
+    console.log(
+      "Main Player: " + indexPlayerTurn + card.value[0] + card.value[1]
+    );
   } else {
     window.alert("Maximum Card");
   }
-  // Check if main player card has been given
-  console.log("Main Player: " + card);
 }
 
-//botPlayerPosition should be 2-5
-function getAnotherCardBot(botPlayerPosition) {
+//indexPlayerTurn should be 1-4
+function getAnotherCardBot() {
+  indexPlayerTurn++;
   // Get the current player
-  var currentPlayer = allPlayers[botPlayerPosition];
+  var currentPlayer = allPlayers[indexPlayerTurn];
 
   if (cardList.length > 0 && currentPlayer.hand.length < 6) {
     // Get a card from the deck
@@ -195,8 +218,7 @@ function getAnotherCardBot(botPlayerPosition) {
     currentPlayer.hand.push(card);
 
     var botHTML = `
-            <div class="card-bot-play">
-
+            <div class="card-bot-play"">
               <div class="card-number-bot">
                 ${card.value[1]}
               </div>
@@ -212,68 +234,56 @@ function getAnotherCardBot(botPlayerPosition) {
                   </div>
                 </div>
               </div>
-
             </div>
           `;
 
-    document.getElementById(`show-card-bot-${botPlayerPosition}`).innerHTML +=
+    document.getElementById(`show-card-bot-${indexPlayerTurn}`).innerHTML +=
       botHTML;
   } else {
-    console.log("Bot" + botPlayerPosition + "Maximum Card");
+    console.log("Bot" + indexPlayerTurn + "Maximum Card");
   }
 }
 
-function getAnotherCard() {
-  for (var i = 0; i < numOfPlayers; i++) {
-    if (i === 0) {
-      // if first player
-      getAnotherCardMainPlayer(i);
-    } else if (i > 0 && i < numOfPlayers) {
-      // if bot
-      getAnotherCardBot(i);
-    }
-  }
-}
-
-window.addEventListener("load", function () {
-  // Call the dealCards function here
-  storgeCard();
-  shuffleArray(cardList);
-  dealCards();
-
+function clickToDrop() {
   // Add event listeners to each card in the hand
-  var handCards = document.querySelectorAll('.show-card .card-mainplay');
+  var handCards = document.querySelectorAll(
+    ".show-card .card, .show-card-bot .card"
+  );
   handCards.forEach(function (card) {
-    card.addEventListener('click', function () {
+    card.addEventListener("click", function () {
       dropCard(card);
     });
   });
-});
-
-//---------------------------------------------------------//
-
-// version 1
-
- /*function dropCard(){
-  
-  // Get the card element from show-card
-  var card = document.getElementById('show-card').firstElementChild
-
-  // Remove the card from show-card
-  document.getElementById('show-card').innerHTML = ''
-
-  // Add the card to drop-card-zone
-  document.querySelector('.drop-card-zone').appendChild(card)
-}*/
-
-function dropCard(cardElement) {
-  // Remove the card from current parent element
-  cardElement.parentNode.removeChild(cardElement);
-
-  // Add the card to drop-card-zone
-  document.querySelector('.drop-card-zone').appendChild(cardElement);
 }
 
+function dropCard(cardElement) {
+  // Remove the card from the show-card zone
+  var showCardZone = document.getElementById("show-card");
+  showCardZone.removeChild(cardElement);
 
+  // Add the card to the drop-card-zone
+  var dropCardZone = document.querySelector(".drop-card-zone");
+  dropCardZone.appendChild(cardElement);
+}
 
+window.addEventListener("load", function () {
+  storgeCard();
+  shuffleArray(cardList);
+  createPlayer();
+  // Main player create
+  createBot();
+  dealCardsMainPlayer(); // Give card to main player
+  for (var i = 0; i < numOfPlayers - 1; i++) {
+    // give card to all bot
+    dealCardsBotPlayer();
+  }
 
+});
+
+/*function dropCard(cardElement) {
+  // Remove the card from the current parent element
+  cardElement.parentNode.removeChild(cardElement);
+
+  // Add the card to the drop-card-zone
+  document.querySelector(".drop-card-zone").appendChild(cardElement);
+}*/
