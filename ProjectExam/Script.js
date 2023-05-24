@@ -184,7 +184,6 @@ function getAnotherCardMainPlayer() {
     allPlayers[0].hand.push(card);
 
     console.log(allPlayers);
-    debugger
     window.localStorage.setItem("allPlayersLocal", JSON.stringify(allPlayers));
 
     allPlayers = window.localStorage.getItem("allPlayersLocal");
@@ -293,7 +292,8 @@ function removeCurrentCardValue(cardElement) {
   });
   cardDrop.push(currentCardInfo);
 
-  //window.localStorage.setItem("cardDrop", JSON.stringify(cardDrop));
+  console.log(cardDrop)
+  window.localStorage.setItem("cardDrop", JSON.stringify(cardDrop));
   //window.localStorage.setItem("allPlayers", JSON.stringify(allPlayers));
 
   console.log(
@@ -468,9 +468,6 @@ function confirmGetCard() {
 }
 
 //************************Player Obtain Card From Drop Ended***************************//
-//************************Bot Obtain Card From Drop Ended***************************//
-
-//************************Bot Obtain Card From Drop Ended***************************//
 //************************Pair Card Start***************************//
 
 function pairCard() {
@@ -526,23 +523,62 @@ function pairCard() {
 
     currentPlayer.isPair = pairsFound; // Update the currentPlayer's isPair property
   }
+  checkEndGame();
 }
 
 function checkEndGame() {
   var allPaired = true; // Flag to track if all players have paired cards
 
+  // Check paired Hand
   for (var i = 0; i < allPlayers.length; i++) {
     var currentPlayer = allPlayers[i];
 
     if (!currentPlayer.isPair) {
       allPaired = false; // Set the flag to false if any player does not have paired cards
-      break;
     }
   }
 
-  if (allPaired) {
+  if (allPaired === true) {
     console.log("Game ended. All cards paired.");
     // Perform game end actions here
+
+    // Get the hand of the winner (assuming there is only one winner)
+    var winner = allPlayers.find((player) => player.isPair);
+    var winnerHand = winner.hand;
+
+    // Convert the hand into a string representation
+    var handString = winnerHand.map((card) => card.value).join(", ");
+
+    // Display the end game HTML code
+    var endGameHTML = `
+      <div class="container-board">
+        <div class="contain-end">
+          <div class="contain-end-box">
+            <div class="contain-end-item">
+              <div class="text-winner">
+                THE WINNER
+              </div>
+              <div class="pic-winner">
+                <!-- Show Picture of winner -->
+                <img src="image/5.png"> 
+              </div>
+            </div>
+            <div class="contain-end-item-center">
+              <div class="card-winner">
+                document.getElementById("show-card").innerHTML += ${handString};
+                <!-- Show card of winner -->
+              </div>
+            </div>
+            <div class="contain-end-item-bottom">
+              <button class="game-button" onclick="window.location.href = 'Home.html';">Finish</button>
+              <button class="game-button" onclick="window.location.href = 'PlayGame.html';">Play Again</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    // Add the end game HTML to the document
+    document.body.innerHTML = endGameHTML;
   } else {
     console.log("Game continues.");
     // Perform actions for game continuation here
@@ -572,19 +608,37 @@ function playTurn() {
   setTimeout(playTurn, 0); // Schedule the next turn asynchronously
 }
 
-window.onload = function () { 
+function reset() {
+  // Reset variables to their initial values or empty states
+  cardList = []; // Assuming cardList is a global variable
+  allPlayers = []; // Assuming allPlayers is a global variable
+  indexPlayerTurn = 0; // Assuming indexPlayerTurn is a global variable
+
+  // Clear local storage
+  window.localStorage.removeItem("cardListLocal");
+  window.localStorage.removeItem("allPlayersLocal");
+
+  // Perform any additional reset operations if needed
+
+  // Reload the page to start a fresh game
+  location.reload();
+}
+
+window.onload = function () {
   cardListLocal = window.localStorage.getItem("cardListLocal"); //52
   allPlayersLocal = window.localStorage.getItem("allPlayersLocal");
+  cardDropLocal = window.localStorage.fetItem("cardDrop")
 
   createPlayer();
   displayBot();
 
   if (cardListLocal === null) {
     storgeCard();
-    console.log("I am here");
+    console.log("I am null");
   } else {
     cardList = JSON.parse(cardListLocal);
     console.log(cardList);
+    console.log("I am not null");
   }
   console.log(JSON.parse(allPlayersLocal));
 

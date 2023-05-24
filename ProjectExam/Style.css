@@ -1,35 +1,40 @@
-body{
-    position: relative;
-    background-image: radial-gradient(circle, rgba(3, 155, 21, 0.74) 0%, rgba(31, 101, 26, 1) 84%);
-    overflow: hidden;
+body {
+  position: relative;
+  background-image: radial-gradient(circle, rgba(3, 155, 21, 0.74) 0%, rgba(31, 101, 26, 1) 84%);
+  overflow: hidden;
 }
+
 .content-title {
-    justify-content: center;
-    align-items: center;
-    
-  }
-.title-pic img{
-    width: 50%;
-    display: block;
-    margin: 0em auto;
+  justify-content: center;
+  align-items: center;
+
 }
+
+.title-pic img {
+  width: 50%;
+  display: block;
+  margin: 0em auto;
+}
+
 .title-text {
-    text-align: center;
-    font-size: 5em;
-    font-weight: 600;
-    color: aliceblue;
-    margin-top: -3em;
+  text-align: center;
+  font-size: 5em;
+  font-weight: 600;
+  color: aliceblue;
+  margin-top: -3em;
 }
-.content-button{
-    justify-content: center;
-    align-items: center;
-    margin-top: 7em;
+
+.content-button {
+  justify-content: center;
+  align-items: center;
+  margin-top: 7em;
 }
+
 .button {
-    padding-bottom: 1em;
-    margin: 0 10px;
-  }
-  
+  padding-bottom: 1em;
+  margin: 0 10px;
+}
+
 .game-button {
   display: block;
   margin: 0 auto;
@@ -41,48 +46,55 @@ body{
   background-image: linear-gradient(180deg, rgba(255, 194, 26, 1) 0%, rgba(239, 140, 1, 1) 100%);
   border: none;
   box-shadow: 9px 2px 15px 0px rgba(212, 116, 8, 0.27);
-  }
-  .title-container{
-    position: absolute;
-  }
-  .support-bg img{
-    position: absolute;
-    width: 100%;
-    margin-top: -15em;
-  }
-  .pic-1 img{
-    position: absolute;
-    width: 8%;
-    padding-left: 7em;
-    padding-top: 1.5em;
-  }
-  .pic-2 img{
-    position: absolute;
-    width: 12%;
-    padding-left: 80em;
-    padding-top: 12em;
-  }
-  .pic-3 img{
-    position: absolute;
-    width: 7%;
-    padding-top: 35em;
-    padding-left: 15em;
-  }
-  .pic-4 img{
-    position: absolute;
-    width: 5%;
-    padding-top: 38em;
-    padding-left: 65em;
-  }
- 
-  /* ---------------------------------------------------------*/
-  .container-head{
-    width: 100%;
-    height: 20vh;
-    position: relative;
-    display: flex;
-  }
-  /*
+}
+
+.title-container {
+  position: absolute;
+}
+
+.support-bg img {
+  position: absolute;
+  width: 100%;
+  margin-top: -15em;
+}
+
+.pic-1 img {
+  position: absolute;
+  width: 8%;
+  padding-left: 7em;
+  padding-top: 1.5em;
+}
+
+.pic-2 img {
+  position: absolute;
+  width: 12%;
+  padding-left: 80em;
+  padding-top: 12em;
+}
+
+.pic-3 img {
+  position: absolute;
+  width: 7%;
+  padding-top: 35em;
+  padding-left: 15em;
+}
+
+.pic-4 img {
+  position: absolute;
+  width: 5%;
+  padding-top: 38em;
+  padding-left: 65em;
+}
+
+/* ---------------------------------------------------------*/
+.container-head {
+  width: 100%;
+  height: 20vh;
+  position: relative;
+  display: flex;
+}
+
+/*
   .score{
     justify-content:center;
     align-items:center;
@@ -141,319 +153,405 @@ body{
     box-shadow: 9px 5px 13px 17px rgba(0, 0, 0, 0.1);
   }
   */
-  .card-number{
-    font-size: 2em;
-    font-weight: 600;
-    padding-left: 5px;
-  }
-  .card-pic1{
-    font-size: 2em;
-    margin-top: -8px;
-    padding-left: 5px;
-  }
-  .card-pic2{
-    font-size: 9em;
-    margin-top: -42px;
-    text-align: right;
-  }
-  .container-board{
-    display: flex;
-    width: 100%;
-    height: 60vh;
-    margin-top: -1.8em;
-  }
-  .player-zone{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    width: 15%;
-  }
-  .player-block{
-    width: 100%;
-    height: 70vh;
-    overflow: hidden;
-  }
-  .circle-pic{
-    position: relative;
-    width: 60%;
-    height: 30%;
-    margin: 25px auto;
-    overflow: hidden;
-    border-radius: 30em;
-    background-color: aliceblue;
-  }
-  .player img{
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-  .board-content{
-    position: relative;
-    display: flex;
-    justify-content:flex-start;
-    align-items: center;
-    width: 60%;
-    padding: 1.5em;
-    padding-left: 8em;
-  }
+.card-number {
+  font-size: 2em;
+  font-weight: 600;
+  padding-left: 5px;
+}
 
-  /**** bot zone ****/
-  /* --------------------------------------*/
+.card-pic1 {
+  font-size: 2em;
+  margin-top: -8px;
+  padding-left: 5px;
+}
 
-  .card-bot{
-    width: 100%;
-  }
-  .show-card-bot{
-    justify-content: center;
-    position: relative;
-    display: flex;
-    overflow: hidden;
-    width: 100%;
-    height: 10vh;
-    padding-top: 0.8em;
-    border-radius: 12px 0px 0px 0px;
-    margin-top: -4em;
-  }
-  .card-bot-play{
-    width: 3em;
-    height: 4em;
-    background-color: aliceblue;
-    border-radius: 0.3em;
-    border: 1px solid #5c5c5c;
-    margin-right: -20px;
-  }
-  .card-number-bot{
-    font-size: 15px;
-    font-weight: 600;
-    padding-left: 5px;
-  }
-  .card-pic1-bot{
-    font-size: 15px;
-    margin-top: -5px;
-    padding-left: 5px;
-  }
-  .card-pic2-bot{
-    font-size: 3em;
-    margin-top: -12px;
-    text-align: right;
-  }
+.card-pic2 {
+  font-size: 9em;
+  margin-top: -42px;
+  text-align: right;
+}
 
+.container-board {
+  display: flex;
+  width: 100%;
+  height: 60vh;
+  margin-top: -1.8em;
+}
 
-   /* --------------------------------------*/
-  .deck-card{
-    width: 45%;
-    padding-right: 3em;
-  }
-  .deck-card img{
-    width: 65%;
-    box-shadow: 9px 5px 13px 17px rgba(0, 0, 0, 0.1);
-  }
-  .drop-card-zone{
-    position: relative;
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-  }
-  .box-drop-card{
-    position: relative;
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-  }
-  .button-drop-card{
-    display: flex;
-    justify-content: right;
-    position: absolute;
-    bottom: -10em; 
-    width: 100%;
-    height: 5vh;
-    margin-right: 50em;
-    
-  }
-  .card-drop{
-    width: 7em;
-    height: 10em;
-    background-color: aliceblue;
-    border-radius: 0.5em;
-    border: 1px solid #5c5c5c;
-    margin-left: -3em;
-  }
-  .main-player{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 30vh;
-    margin-top: -1em;
-  
-  }
-  .show-card{
-    justify-content: center;
-    position: relative;
-    display: flex;
-    width: 50%;
-    padding-top: 0.8em;
-    border-radius: 12px 0px 0px 0px;
-    background-color: rgba(29, 29, 29, 0.288);
-  }
-  .card-mainplay{
-    width: 7em;
-    height: 10em;
-    background-color: aliceblue;
-    border-radius: 0.5em;
-    border: 1px solid #5c5c5c;
-    margin-right: 6px;
-  }
-  .main-player-info{
-    width: 20%;
-    border-radius: 0px 12px 0px 0px;
-    background-color: rgba(29, 29, 29, 0.288);
-    border-left: 4px solid #154d24;
-  }
-  .player-main-block{
-    position: relative;
-    width: 45%;
-    height: 60%;
-    margin: 25px auto;
-    overflow: hidden;
-    border-radius: 30em;
-    background-color: aliceblue;
-  }
-  .player-main img{
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
+.player-zone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 15%;
+}
 
-  /* ---------------------------------------------------------------------------*/ 
-  /* Select Play */
-  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+.player-block {
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.circle-pic {
+  position: relative;
+  width: 60%;
+  height: 30%;
+  margin: 25px auto;
+  overflow: hidden;
+  border-radius: 30em;
+  background-color: aliceblue;
+}
+
+.player img {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.board-content {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 60%;
+  padding: 1.5em;
+  padding-left: 8em;
+}
+
+/**** bot zone ****/
+/* --------------------------------------*/
+
+.card-bot {
+  width: 100%;
+}
+
+.show-card-bot {
+  justify-content: center;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  height: 10vh;
+  padding-top: 0.8em;
+  border-radius: 12px 0px 0px 0px;
+  margin-top: -4em;
+}
+
+.card-bot-play {
+  width: 3em;
+  height: 4em;
+  background-color: aliceblue;
+  border-radius: 0.3em;
+  border: 1px solid #5c5c5c;
+  margin-right: -20px;
+}
+
+.card-number-bot {
+  font-size: 15px;
+  font-weight: 600;
+  padding-left: 5px;
+}
+
+.card-pic1-bot {
+  font-size: 15px;
+  margin-top: -5px;
+  padding-left: 5px;
+}
+
+.card-pic2-bot {
+  font-size: 3em;
+  margin-top: -12px;
+  text-align: right;
+}
 
 
-  .container-box{
-    font-family: "Inter", sans-serif;
-    position: relative;
-    width: 22%;
-    height: 65vh;
-    padding: 1em;
-    background-color: aliceblue;
-    margin: 8em auto;
-    text-align: center;
-    border-radius: 1em;
-  }
-  .title-img img{
-    width: 110%;
-    margin-left: -1em;
-    margin-top: -1em;
-  }
-  .select-player-checkbox{
-    position: absolute;
-    width: 100%; 
-  }
-  .checkbox{
-    margin: 1em 4em;
-  }
-  .checkbox-input {
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
-  
-    &:checked + .checkbox-tile {
-      border-color: #2260ff;
-      box-shadow: 0 5px 10px rgba(#000, 0.1);
-      color: #2260ff;
-      &:before {
-        transform: scale(1);
-        opacity: 1;
-        background-color: #2260ff;
-        border-color: #2260ff;
-      }
-      
-      .checkbox-icon, .checkbox-label {
-        color: #2260ff;
-      }
-    }
-    
-    &:focus + .checkbox-tile {
-      border-color: #2260ff;
-      box-shadow: 0 5px 10px rgba(#000, 0.1), 0 0 0 4px #b5c9fc;
-      &:before {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-  }
-  .checkbox-wrapper{
-    display: flex;
-    padding-left: 2em;
-  }
-  .checkbox-tile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 70%;
-    height: 5vh;
-    border-radius: 0.5em;
-    border: 2px solid #b5bfd9;
-    background-color: #fff;
-    transition: 0.15s ease;
-    cursor: pointer;
-    position: relative;
+/* --------------------------------------*/
+.deck-card {
+  width: 45%;
+  padding-right: 3em;
+}
+
+.deck-card img {
+  width: 65%;
+  box-shadow: 9px 5px 13px 17px rgba(0, 0, 0, 0.1);
+}
+
+.drop-card-zone {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.box-drop-card {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.button-drop-card {
+  display: flex;
+  justify-content: right;
+  position: absolute;
+  bottom: -10em;
+  width: 100%;
+  height: 5vh;
+  margin-right: 50em;
+
+}
+
+.card-drop {
+  width: 7em;
+  height: 10em;
+  background-color: aliceblue;
+  border-radius: 0.5em;
+  border: 1px solid #5c5c5c;
+  margin-left: -3em;
+}
+
+.main-player {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 30vh;
+  margin-top: -1em;
+
+}
+
+.show-card {
+  justify-content: center;
+  position: relative;
+  display: flex;
+  width: 50%;
+  padding-top: 0.8em;
+  border-radius: 12px 0px 0px 0px;
+  background-color: rgba(29, 29, 29, 0.288);
+}
+
+.card-mainplay {
+  width: 7em;
+  height: 10em;
+  background-color: aliceblue;
+  border-radius: 0.5em;
+  border: 1px solid #5c5c5c;
+  margin-right: 6px;
+}
+
+.main-player-info {
+  width: 20%;
+  border-radius: 0px 12px 0px 0px;
+  background-color: rgba(29, 29, 29, 0.288);
+  border-left: 4px solid #154d24;
+}
+
+.player-main-block {
+  position: relative;
+  width: 45%;
+  height: 60%;
+  margin: 25px auto;
+  overflow: hidden;
+  border-radius: 30em;
+  background-color: aliceblue;
+}
+
+.player-main img {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ---------------------------------------------------------------------------*/
+/* Select Play */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+
+.container-box {
+  font-family: "Inter", sans-serif;
+  position: relative;
+  width: 22%;
+  height: 65vh;
+  padding: 1em;
+  background-color: aliceblue;
+  margin: 8em auto;
+  text-align: center;
+  border-radius: 1em;
+}
+
+.title-img img {
+  width: 110%;
+  margin-left: -1em;
+  margin-top: -1em;
+}
+
+.select-player-checkbox {
+  position: absolute;
+  width: 100%;
+}
+
+.checkbox {
+  margin: 1em 4em;
+}
+
+.checkbox-input {
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+
+  &:checked+.checkbox-tile {
+    border-color: #2260ff;
+    box-shadow: 0 5px 10px rgba(#000, 0.1);
+    color: #2260ff;
 
     &:before {
-      content: "";
-      position: absolute;
-      display: block;
-      width: 1.25rem;
-      height: 1.25rem;
-      border: 2px solid #b5bfd9;
-      background-color: #fff;
-      border-radius: 50%;
-      top: 0.25rem;
-      left: 0.25rem;
-      opacity: 0;
-      transform: scale(0);
-      transition: 0.25s ease;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' fill='%23FFFFFF' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'%3E%3C/rect%3E%3Cpolyline points='216 72.005 104 184 48 128.005' fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'%3E%3C/polyline%3E%3C/svg%3E");
-      background-size: 12px;
-      background-repeat: no-repeat;
-      background-position: 50% 50%;
-    }
-    &:hover {
+      transform: scale(1);
+      opacity: 1;
+      background-color: #2260ff;
       border-color: #2260ff;
-      &:before {
-        transform: scale(1);
-        opacity: 1;
-      }
+    }
+
+    .checkbox-icon,
+    .checkbox-label {
+      color: #2260ff;
     }
   }
-  .checkbox-icon {
-    transition: .375s ease;
-    color: #494949;
+
+  &:focus+.checkbox-tile {
+    border-color: #2260ff;
+    box-shadow: 0 5px 10px rgba(#000, 0.1), 0 0 0 4px #b5c9fc;
+
+    &:before {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
-  .checkbox-label {
-    color: #707070;
-    transition: .375s ease;
-    text-align: center;
-  }
-  .button-zone{
-    display: flex;
-    justify-content: space-evenly;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  padding-left: 2em;
+}
+
+.checkbox-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 5vh;
+  border-radius: 0.5em;
+  border: 2px solid #b5bfd9;
+  background-color: #fff;
+  transition: 0.15s ease;
+  cursor: pointer;
+  position: relative;
+
+  &:before {
+    content: "";
     position: absolute;
-    bottom: 3em; 
-    left: 0; 
-    width: 100%;
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid #b5bfd9;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 0.25rem;
+    left: 0.25rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: 0.25s ease;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' fill='%23FFFFFF' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='none'%3E%3C/rect%3E%3Cpolyline points='216 72.005 104 184 48 128.005' fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
   }
-  .button-slp a{
-    text-decoration: none;
-    padding: 0.5em 1em;
-    background-image: linear-gradient(180deg, rgba(255, 194, 26, 1) 0%, rgba(239, 140, 1, 1) 100%);
-    border: none;
-    box-shadow: 9px 2px 15px 0px rgba(212, 116, 8, 0.27);
-    border-radius: 6px; 
+
+  &:hover {
+    border-color: #2260ff;
+
+    &:before {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
-  
+}
+
+.checkbox-icon {
+  transition: .375s ease;
+  color: #494949;
+}
+
+.checkbox-label {
+  color: #707070;
+  transition: .375s ease;
+  text-align: center;
+}
+
+.button-zone {
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  bottom: 3em;
+  left: 0;
+  width: 100%;
+}
+
+.button-slp a {
+  text-decoration: none;
+  padding: 0.5em 1em;
+  background-image: linear-gradient(180deg, rgba(255, 194, 26, 1) 0%, rgba(239, 140, 1, 1) 100%);
+  border: none;
+  box-shadow: 9px 2px 15px 0px rgba(212, 116, 8, 0.27);
+  border-radius: 6px;
+}
+
+/*---------------------------End Game-----------------------------------*/
+.contain-end {
+  margin: 5em auto;
+  width: 50%;
+  height: 80vh;
+  background-color: #5c5c5c;
+}
+
+.contain-end-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contain-end-item {
+  width: 100%;
+  height: 40vh;
+  background-color: #154d24;
+}
+
+.text-winner {
+  width: 100%;
+  height: 20vh;
+  background-color: #b5bfd9;
+}
+
+.pic-winner {
+  width: 100%;
+  height: 20vh;
+  background-color: aliceblue;
+}
+
+.contain-end-item-center {
+  width: 100%;
+  height: 30vh;
+  background-color: #fff;
+}
+
+.contain-end-item-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1em;
+}
