@@ -183,13 +183,7 @@ function getAnotherCardMainPlayer() {
     // Add the card to the current player's hand
     allPlayers[0].hand.push(card);
 
-    console.log(allPlayers);
     window.localStorage.setItem("allPlayersLocal", JSON.stringify(allPlayers));
-
-    allPlayers = window.localStorage.getItem("allPlayersLocal");
-    allPlayers = JSON.parse(allPlayers);
-
-    console.log(allPlayers);
 
     // Only 1 player show
     // Generate HTML for the card
@@ -233,9 +227,6 @@ function getAnotherCardBot() {
     var card = cardList.pop();
     // Add the card to the current player's hand
     currentPlayer.hand.push(card);
-
-    //window.localStorage.setItem("cardList", JSON.stringify(cardList));
-    //window.localStorage.setItem("allPlayers", JSON.stringify(allPlayers));
 
     var botHTML = `
             <div class="card-bot-play"">
@@ -285,44 +276,44 @@ function removeCurrentCardValue(cardElement) {
   var cardTitle = cardElement.querySelector(".card-title").textContent.trim();
 
   // get value of the card that click
-  var currentCardInfo = { value: [cardTitle, cardNumber] };
+  var currentCardInfo = { value: [cardTitle, cardNumber], isPair: false };
 
   allPlayers[0].hand = allPlayers[0].hand.filter(function (card) {
     return card.value[1] !== currentCardInfo.value[1];
   });
   cardDrop.push(currentCardInfo);
 
-  console.log(cardDrop)
-  window.localStorage.setItem("cardDrop", JSON.stringify(cardDrop));
-  //window.localStorage.setItem("allPlayers", JSON.stringify(allPlayers));
-
-  console.log(
-    "In hand, there are " +
-      allPlayers[0].hand.length +
-      " cards remaining: " +
-      JSON.stringify(allPlayers[0].hand)
-  );
   console.log(
     "I am Clicked. Card Number: " +
       currentCardInfo.value[1] +
       ", Card Title: " +
       currentCardInfo.value[0]
   );
+  console.log(
+    "In hand, there are " +
+      allPlayers[0].hand.length +
+      " cards remaining: " +
+      JSON.stringify(allPlayers[0].hand)
+  );
 }
 
 function dropCard() {
   // For Main Player
-  removeCurrentCardValue(cardElement); // drop card that player choose
-  var boxDropCard = document.querySelector(".box-drop-card");
-  boxDropCard.appendChild(cardElement); // move it to .box-drop-card
+  if (allPlayers[0].hand.length === 6) {
+    removeCurrentCardValue(cardElement); // drop card that player choose
+    var boxDropCard = document.querySelector(".box-drop-card");
+    boxDropCard.appendChild(cardElement); // move it to .box-drop-card
 
-  // Change the class of the dropped card
-  cardElement.classList.remove("card-mainplay");
-  cardElement.classList.add("card-drop");
+    // Change the class of the dropped card
+    cardElement.classList.remove("card-mainplay");
+    cardElement.classList.add("card-drop");
 
-  cardElement.setAttribute("onclick", "confirmGetCard()"); // Add onclick attribute
+    cardElement.setAttribute("onclick", "confirmGetCard()"); // Add onclick attribute
 
-  playTurn();
+    playTurn();
+  } else {
+    window.alert("Please draw a card first");
+  }
 }
 
 //************************Player Drop Ended******************************//
@@ -364,9 +355,6 @@ function botDropCard() {
     // Add the dropped card to the cardDrop array
     cardDrop.push(card);
 
-    //window.localStorage.setItem("cardDrop", JSON.stringify(cardDrop));
-    //window.localStorage.setItem("allPlayers", JSON.stringify(allPlayers));
-
     // Create a new card element for the dropped card
     var cardElement = createCardElement(card);
 
@@ -392,6 +380,26 @@ function botDropCard() {
 }
 
 //************************Bot Drop Ended***************************//
+//************************Display Drop Start***************************//
+
+function displayAllDropCard(card) {
+  var dropHTML = `<div class="card-drop" onclick="confirmGetCard()">
+      <div class="card-number">${card.value[1]}</div>
+      <div class="card-body">
+        <div class="card-pic1">
+          <div class="card-title">${card.value[0]}</div>
+        </div>
+        <div class="card-pic2">
+          <div class="card-title">${card.value[0]}</div>
+        </div>
+      </div>
+    </div>`;
+
+  var boxDropCard = document.querySelector(".box-drop-card");
+  boxDropCard.innerHTML += dropHTML;
+}
+
+//************************Display Drop Ended***************************//
 //************************Player Obtain Card From Drop Start***************************//
 
 function getAnotherCardFromDrop(cardElement) {
@@ -415,9 +423,6 @@ function getAnotherCardFromDrop(cardElement) {
 
       // Add the card to the current player's hand
       allPlayers[0].hand.push(card);
-
-      //window.localStorage.setItem("cardDrop", JSON.stringify(cardDrop));
-      //window.localStorage.setItem("allPlayers", JSON.stringify(allPlayers));
 
       // Generate HTML for the card
       var cardHTML = `
@@ -462,6 +467,11 @@ function confirmGetCard() {
     if (confirmAction) {
       // Call getAnotherCardFromDrop with the selected card element
       getAnotherCardFromDrop(cardElement);
+      window.localStorage.setItem(
+        "allPlayersLocal",
+        JSON.stringify(allPlayers)
+      );
+      window.localStorage.setItem("cardDrop", JSON.stringify(cardDrop));
     }
   }
   // Prompt the user for confirmation
@@ -532,9 +542,10 @@ function checkEndGame() {
   // Check paired Hand
   for (var i = 0; i < allPlayers.length; i++) {
     var currentPlayer = allPlayers[i];
-
-    if (!currentPlayer.isPair) {
-      allPaired = false; // Set the flag to false if any player does not have paired cards
+    for (var j = 0; j < currentPlayer.hand; i++) {
+      if (currentPlayer.hand[j].isPair !== true) {
+        allPaired = false; // Set the flag to false if any player does not have paired cards
+      }
     }
   }
 
@@ -543,40 +554,55 @@ function checkEndGame() {
     // Perform game end actions here
 
     // Get the hand of the winner (assuming there is only one winner)
-    var winner = allPlayers.find((player) => player.isPair);
+    var winner = allPlayers.find((currentPlayer) => currentPlayer.isPair);
     var winnerHand = winner.hand;
 
     // Convert the hand into a string representation
-    var handString = winnerHand.map((card) => card.value).join(", ");
+    var handString = winnerHand
+      .map(
+        (card) => `
+  <div class="card-mainplay">
+    <div class="card-number">${card.value[1]}</div>  
+    <div class="card-body">
+      <div class="card-pic1">
+        <div class="card-title">${card.value[0]}</div>
+      </div>
+      <div class="card-pic2">
+        <div class="card-title">${card.value[0]}</div>
+      </div>
+    </div>
+  </div>
+`
+      )
+      .join("");
 
-    // Display the end game HTML code
     var endGameHTML = `
-      <div class="container-board">
-        <div class="contain-end">
-          <div class="contain-end-box">
-            <div class="contain-end-item">
-              <div class="text-winner">
-                THE WINNER
-              </div>
-              <div class="pic-winner">
-                <!-- Show Picture of winner -->
-                <img src="image/5.png"> 
-              </div>
-            </div>
-            <div class="contain-end-item-center">
-              <div class="card-winner">
-                document.getElementById("show-card").innerHTML += ${handString};
-                <!-- Show card of winner -->
-              </div>
-            </div>
-            <div class="contain-end-item-bottom">
-              <button class="game-button" onclick="window.location.href = 'Home.html';">Finish</button>
-              <button class="game-button" onclick="window.location.href = 'PlayGame.html';">Play Again</button>
-            </div>
+  <div class="container-board">
+    <div class="contain-end">
+      <div class="contain-end-box">
+        <div class="contain-end-item">
+          <div class="text-winner" style="display: flex; justify-content: center; align-items: center; font-size: 125px;">
+            THE WINNER
+          </div>
+          <div class="pic-winner">
+            <!-- Show Picture of winner -->
+            <img src="image/5.png"> 
           </div>
         </div>
+        <div class="contain-end-item-center">
+          <div class="card-winner" style="display: flex; justify-content: center; gap: 25px;">
+            ${handString}
+          </div>
+        </div>
+        <div class="contain-end-item-bottom">
+          <button class="game-button" onclick="window.location.href = 'Home.html';">Finish</button>
+          <button class="game-button" onclick="playAgainAndReset()">Play Again</button>
+        </div>
       </div>
-    `;
+    </div>
+  </div>
+`;
+
     // Add the end game HTML to the document
     document.body.innerHTML = endGameHTML;
   } else {
@@ -592,14 +618,24 @@ function playTurn() {
   if (indexPlayerTurn >= numOfPlayers) {
     console.log("End of round. Next round begins.");
     indexPlayerTurn = 0; // Reset the turn to the main player
-    checkEndGame(); // Check if the game has ended
     return;
   }
 
   if (indexPlayerTurn !== 0) {
     getAnotherCardBot();
     botDropCard();
+
+    window.localStorage.setItem("cardListLocal", JSON.stringify(cardList));
+    window.localStorage.setItem("allPlayersLocal", JSON.stringify(allPlayers));
+    window.localStorage.setItem("cardDrop", JSON.stringify(cardDrop));
   }
+
+  cardListLocal = window.localStorage.getItem("cardListLocal");
+  allPlayersLocal = window.localStorage.getItem("allPlayersLocal");
+  cardDropLocal = window.localStorage.getItem("cardDrop");
+  /*console.log(cardListLocal);
+  console.log(allPlayersLocal);
+  console.log(cardDropLocal);*/
 
   console.log("indexPlayerTurn:", indexPlayerTurn); // Log the current value of indexPlayerTurn
 
@@ -608,15 +644,23 @@ function playTurn() {
   setTimeout(playTurn, 0); // Schedule the next turn asynchronously
 }
 
+//******************Reset******************//
+
 function reset() {
   // Reset variables to their initial values or empty states
   cardList = []; // Assuming cardList is a global variable
   allPlayers = []; // Assuming allPlayers is a global variable
+  cardDrop = [];
   indexPlayerTurn = 0; // Assuming indexPlayerTurn is a global variable
+
+  cardListLocal = [];
+  allPlayersLocal = [];
+  cardDropLocal = [];
 
   // Clear local storage
   window.localStorage.removeItem("cardListLocal");
   window.localStorage.removeItem("allPlayersLocal");
+  window.localStorage.removeItem("cardDrop");
 
   // Perform any additional reset operations if needed
 
@@ -624,10 +668,16 @@ function reset() {
   location.reload();
 }
 
+function playAgainAndReset() {
+  window.location.href = "PlayGame.html";
+  reset();
+}
+//******************Reset******************//
+
 window.onload = function () {
-  cardListLocal = window.localStorage.getItem("cardListLocal"); //52
+  cardListLocal = window.localStorage.getItem("cardListLocal");
   allPlayersLocal = window.localStorage.getItem("allPlayersLocal");
-  cardDropLocal = window.localStorage.fetItem("cardDrop")
+  cardDropLocal = window.localStorage.getItem("cardDrop");
 
   createPlayer();
   displayBot();
@@ -635,10 +685,11 @@ window.onload = function () {
   if (cardListLocal === null) {
     storgeCard();
     console.log("I am null");
+    console.log(cardList);
   } else {
     cardList = JSON.parse(cardListLocal);
-    console.log(cardList);
     console.log("I am not null");
+    console.log(cardList);
   }
   console.log(JSON.parse(allPlayersLocal));
 
@@ -673,6 +724,14 @@ window.onload = function () {
         }
       }
       indexPlayerTurn++;
+    }
+  }
+
+  if (cardDropLocal !== null) {
+    // if there are something inside
+    cardDrop = JSON.parse(cardDropLocal);
+    for (var i = 0; i < cardDrop.length; i++) {
+      displayAllDropCard(cardDrop[i]);
     }
   }
 
