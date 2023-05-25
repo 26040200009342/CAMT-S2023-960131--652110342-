@@ -5,48 +5,85 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Style.css">
-
-    <title> phasom10_homepage </title>
-
+    <link href="https://fonts.cdnfonts.com/css/games" rel="stylesheet">
+    <link rel="stylesheet" href="HomeStyle.css">
+    <title> Somsib-game-home_page</title>
 </head>
 
 <body>
+    <audio src="home.mp3" loop></audio>
+    <div class="container">
+        <div class="content">
+            <div class="content-title">
+                <div class="content-title-left">
+                    <img src="img/3.png">
+                    <div id="shadow" class="shadow"></div>
+                </div>
+                <div class="content-title-center">
+                    <div class="title-box">
+                        <!--
+                         <div class="title-img">
+                            <img src="img/title_bg.png">
+                        </div>   
+                        -->
+                        <div class="title-text">
+                            Phasom10
+                        </div>
+                    </div>
+                    <div class="button-start">
+                        <button class="game-button" onclick="playSound() ">Start</button>
+                    </div>
+                </div>
+                <script>
+                    function playSound() {
+                        const sound = new Audio('sound/button.mp3');
+                        sound.play();
+                        window.location.href = "SelectPlayer.html";
+                    }
+                </script>
+            </div>
 
-
-    <div class="container-bg">
-        <div class="support-bg">
-            <img src="image/bg_support.png">
-        </div>
-        <div class="pic-1">
-            <img src="image/pic_1.png">
-        </div>
-        <div class="pic-2">
-            <img src="image/pic_2.png">
-        </div>
-        <div class="pic-3">
-            <img src="image/pic_2.png">
-        </div>
-        <div class="pic-4">
-            <img src="image/pic_1.png">
         </div>
     </div>
 
-    <div class="title-container">
-        <div class="content-title">
-            <div class="title-pic">
-                <img src="image/title_bg.png">
-            </div>
-            <div class="title-text">
-                <div>Phasom10.com</div>
-            </div>
-        </div>
-        <div class="content-button">
-            <div class="button">
-                <button class="game-button" onclick="window.location.href = 'SelectPlayer.html';">Start</button>
-            </div>
+    <!-- Background moving-->
+    <div class="bg-container">
+        <div class="area">
+            <ul class="circles">
+                <li>
+                    <img src="img/bgc1.png">
+                </li>
+                <li>
+                    <img src="img/bgc2.png">
+                </li>
+                <li>
+                    <img src="img/bgc3.png">
+                </li>
+                <li>
+                    <img class="bgc" src="img/bgc4.png">
+                </li>
+                <li>
+                    <img src="img/bgc5.png">
+                </li>
+                <li>
+                    <img src="img/bgc6.png">
+                </li>
+                <li>
+                    <img src="img/bgc7.png">
+                </li>
+                <li>
+                    <img src="img/bgc8.png">
+                </li>
+                <li>
+                    <img src="img/bgc9.png">
+                </li>
+                <li>
+                    <img src="img/bgc10.png">
+                </li>
+            </ul>
         </div>
     </div>
+    <!-- Background moving end -->
 </body>
 
 </html>

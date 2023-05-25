@@ -14,86 +14,72 @@
     <script src="Script.js"></script>
     <div class="container-game">
         <div class="container-head">
-            <!--
-            <div class="score">
-                <div class="score-text">
-                    <div>Score</div>
-                </div>
-                <div class="score-pic">
-                    <img src="image/pic_money.png">
-                </div>
+            <div class="volume">
+                <img id="deck-image" src="img/mute.png">
+                <audio id="music" src="sound/Music.mp3" loop autoplay></audio>
             </div>
-            
-            <div class="joke-card-place">
-                <div class="boeder-joke-card">
-                    <div class="joke-card">
-                        <div class="card-number">
-                            A
-                        </div>
-                        <div class="card-body">
-                            <div class="card-pic1">
-                                <div class="card-title">
-                                    ♣
-                                </div>
-                            </div>
-                            <div class="card-pic2">
-                                <div class="card-title">
-                                    ♣
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-border">
-                        Joke
-                    </div>
-                </div>
-
-            </div> -->
         </div>
-        <div class="container-board">
-            <div class="player-zone" id="player-zone">
-                <!--The player will be add from JS-->
+        <script>
+            var image = document.getElementById("deck-image");
+            var audio = document.getElementById("music");
 
-            </div>
-            <div class="board-content">
-                <div class="deck-card" onclick="getAnotherCardMainPlayer()">
-                    <img id="deck-image" src="image/deck-card.png">
-                </div>
-                <div class="drop-card-zone">
-                    <div class="box-drop-card">
-                        <!--Drop card here-->
+            audio.volume = 0.75; // Set volume to 50%
 
-                    </div>
-                    <div class="button-drop-card">
-                        <div class="button-slp" id="drop">
-                            <button onclick="dropCard()">Drop</button>
-                        </div>
-                        <div class="button-slp" id="pair">
-                            <button onclick="pairCard()">pair</button>
-                        </div>
-                        <div class="button-slp" id="reset">
-                            <button onclick="reset()">reset</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
+            image.addEventListener("click", function () {
+                if (audio.paused) {
+                    audio.play();
+                    image.src = "img/volume.png";
+                } else {
+                    audio.pause();
+                    image.src = "img/mute.png";
+                }
+            });
+        </script>
+    </div>
+    <div class="container-board">
+        <div class="player-zone" id="player-zone">
+            <!--The player will be add from JS-->
 
         </div>
-        <div class="main-player">
-            <div class="show-card" id="show-card">
-                <!--The card will be add from JS-->
-
+        <div class="board-content">
+            <div class="deck-card" onclick="getAnotherCardMainPlayer(); dealCard()">
+                <img  id="deck-image" src="img/deck-card.png">
             </div>
-            <div class="main-player-info">
-                <div class="player-main-block">
-                    <div class="player-main">
-                        <img src="image/5.png">
+            <div class="drop-card-zone">
+                <div class="box-drop-card">
+                    <!--Drop card here-->
+
+                </div>
+                <div class="button-drop-card">
+                    <div class="button-slp" id="drop">
+                        <button onclick="dropCard(); cardSound()">Drop</button>
                     </div>
+                    <div class="button-slp" id="pair">
+                        <button onclick="pairCard();">pair</button>
+                    </div>
+                    <div class="button-slp" id="reset">
+                        <button onclick="reset(); resetSound()">reset</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="main-player">
+        <div class="show-card" id="show-card">
+            <!--The card will be add from JS-->
+
+        </div>
+        <div class="main-player-info">
+            <div class="player-main-block">
+                <div class="player-main">
+                    <img src="img/mainplayer.png">
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 

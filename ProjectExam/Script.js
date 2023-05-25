@@ -75,7 +75,7 @@ function displayBot() {
           <div class="player-block" id="player-block-${i}"><!--player bot-->
             <div class="circle-pic">
               <div class="player">
-                <img src="image/1.png">
+                <img src="img/BOT1.png">
               </div> 
             </div>
             <div class="card-bot">
@@ -275,11 +275,14 @@ function removeCurrentCardValue(cardElement) {
   var cardNumber = cardElement.querySelector(".card-number").textContent.trim();
   var cardTitle = cardElement.querySelector(".card-title").textContent.trim();
 
-  // get value of the card that click
+  // Get value of the card that was clicked
   var currentCardInfo = { value: [cardTitle, cardNumber], isPair: false };
 
   allPlayers[0].hand = allPlayers[0].hand.filter(function (card) {
-    return card.value[1] !== currentCardInfo.value[1];
+    return (
+      card.value[1] !== currentCardInfo.value[1] ||
+      card.value[0] !== currentCardInfo.value[0]
+    );
   });
   cardDrop.push(currentCardInfo);
 
@@ -299,20 +302,25 @@ function removeCurrentCardValue(cardElement) {
 
 function dropCard() {
   // For Main Player
-  if (allPlayers[0].hand.length === 6) {
-    removeCurrentCardValue(cardElement); // drop card that player choose
-    var boxDropCard = document.querySelector(".box-drop-card");
-    boxDropCard.appendChild(cardElement); // move it to .box-drop-card
+  if (cardElement !== null) {
+    if (allPlayers[0].hand.length === 6) {
+      removeCurrentCardValue(cardElement); // drop card that player choose
+      var boxDropCard = document.querySelector(".box-drop-card");
+      boxDropCard.appendChild(cardElement); // move it to .box-drop-card
 
-    // Change the class of the dropped card
-    cardElement.classList.remove("card-mainplay");
-    cardElement.classList.add("card-drop");
+      // Change the class of the dropped card
+      cardElement.classList.remove("card-mainplay");
+      cardElement.classList.add("card-drop");
 
-    cardElement.setAttribute("onclick", "confirmGetCard()"); // Add onclick attribute
+      cardElement.setAttribute("onclick", "confirmGetCard()"); // Add onclick attribute
 
-    playTurn();
+      playTurn();
+    } else {
+      window.alert("Please draw a card first");
+    }
+    cardElement = null;
   } else {
-    window.alert("Please draw a card first");
+    window.alert("Please pick a card you want to drop");
   }
 }
 
@@ -537,20 +545,29 @@ function pairCard() {
 }
 
 function checkEndGame() {
-  var allPaired = true; // Flag to track if all players have paired cards
+  var allPaired = false; // Flag to track if all players have paired cards
 
   // Check paired Hand
   for (var i = 0; i < allPlayers.length; i++) {
     var currentPlayer = allPlayers[i];
-    for (var j = 0; j < currentPlayer.hand; i++) {
+    var hasAllCardsPaired = true; // Flag to track if all cards of the current player are paired
+
+    for (var j = 0; j < currentPlayer.hand.length; j++) {
       if (currentPlayer.hand[j].isPair !== true) {
-        allPaired = false; // Set the flag to false if any player does not have paired cards
+        hasAllCardsPaired = false; // Set the flag to false if any card is not paired
+        break; // Break the inner loop if a non-paired card is found
       }
+    }
+
+    if (hasAllCardsPaired) {
+      allPaired = true; // Set the flag to true if all cards of the current player are paired
+      break; // Break the outer loop if a player with all cards paired is found
     }
   }
 
   if (allPaired === true) {
     console.log("Game ended. All cards paired.");
+    winSound();
     // Perform game end actions here
 
     // Get the hand of the winner (assuming there is only one winner)
@@ -581,16 +598,16 @@ function checkEndGame() {
     <div class="contain-end">
       <div class="contain-end-box">
         <div class="contain-end-item">
-          <div class="text-winner" style="display: flex; justify-content: center; align-items: center; font-size: 125px;">
+          <div class="text-winner" style="display: flex; justify-content: center; align-items: center; font-size: 100px;">
             THE WINNER
           </div>
-          <div class="pic-winner">
+          <div class="pic-winner" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
             <!-- Show Picture of winner -->
-            <img src="image/5.png"> 
+            <img src="img/mainplayer.png" style=" width: 20%; height: 20vh;"> 
           </div>
         </div>
-        <div class="contain-end-item-center">
-          <div class="card-winner" style="display: flex; justify-content: center; gap: 25px;">
+        <div class="contain-end-item-center" style="display: flex; justify-content: center; align-items: center;">
+          <div class="card-winner" style="display: flex; justify-content: center; gap: 5px;">
             ${handString}
           </div>
         </div>
@@ -606,7 +623,7 @@ function checkEndGame() {
     // Add the end game HTML to the document
     document.body.innerHTML = endGameHTML;
   } else {
-    console.log("Game continues.");
+    window.alert("Game continues.");
     // Perform actions for game continuation here
   }
 }
@@ -673,6 +690,29 @@ function playAgainAndReset() {
   reset();
 }
 //******************Reset******************//
+//******************Sound******************//
+
+function cardSound() {
+  const sound = new Audio("Card.mp3");
+  sound.play();
+}
+
+function dealCard() {
+  const sound = new Audio("dealCard.mp3");
+  sound.play();
+}
+
+function winSound() {
+  const sound = new Audio("winner.mp3");
+  sound.play();
+}
+
+function resetSound() {
+  const sound = new Audio("archive.mp3");
+  sound.play();
+}
+
+//******************Sound******************//
 
 window.onload = function () {
   cardListLocal = window.localStorage.getItem("cardListLocal");
