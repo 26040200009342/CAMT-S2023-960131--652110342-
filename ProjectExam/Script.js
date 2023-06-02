@@ -570,6 +570,8 @@ function checkEndGame() {
     winSound();
     // Perform game end actions here
 
+    addNewTodoItem(currentPlayer.hand)
+
     // Get the hand of the winner (assuming there is only one winner)
     var winner = allPlayers.find((currentPlayer) => currentPlayer.isPair);
     var winnerHand = winner.hand;

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Style.css">
-
+    
     <title>play game</title>
 </head>
 
@@ -43,7 +43,7 @@
         </div>
         <div class="board-content">
             <div class="deck-card" onclick="getAnotherCardMainPlayer(); dealCard()">
-                <img  id="deck-image" src="img/deck-card.png">
+                <img id="deck-image" src="img/deck-card.png">
             </div>
             <div class="drop-card-zone">
                 <div class="box-drop-card">
@@ -52,13 +52,13 @@
                 </div>
                 <div class="button-drop-card">
                     <div class="button-slp" id="drop">
-                        <button onclick="dropCard(); cardSound()">Drop</button>
+                        <button class="game-button" onclick="dropCard(); cardSound()">Drop</button>
                     </div>
                     <div class="button-slp" id="pair">
-                        <button onclick="pairCard();">pair</button>
+                        <button class="game-button" onclick="pairCard();">pair</button>
                     </div>
                     <div class="button-slp" id="reset">
-                        <button onclick="reset(); resetSound()">reset</button>
+                        <button class="game-button" onclick="reset(); resetSound()">reset</button>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
             </div>
         </div>
     </div>
-    </div>
+    <script src="API.js"></script>
 </body>
 
 </html>

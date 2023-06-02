@@ -45,7 +45,7 @@ body {
   font-weight: 700;
   background-image: linear-gradient(180deg, rgba(255, 194, 26, 1) 0%, rgba(239, 140, 1, 1) 100%);
   border: none;
-  box-shadow: 9px 2px 15px 0px rgba(212, 116, 8, 0.27);
+  box-shadow: 9px 2px 15px 0px rgba(212, 116, 8, 0.27); 
 }
 
 .title-container {
@@ -530,13 +530,45 @@ body {
 .contain-end-item {
   width: 100%;
   height: 40vh;
-  background-color: #154d24;
+  background-color: aliceblue;
 }
 
-.text-winner {
-  width: 100%;
-  height: 20vh;
-  background-color: #b5bfd9;
+.text-winner{
+  height: 55%;
+	margin-left: -5px;
+  margin-top: -25px;
+	animation: floating-text 2s ease-in-out infinite;
+	font-family:"Raleway";
+	font-weight:900;
+	font-size:150px;
+	line-height:1.4;
+	text-align: center;
+	color:#fffb00;
+  	font-weight:900;
+  	font-size:4.5em;
+  	text-transform:uppercase;
+  	line-height:1;
+  	text-align:center;
+  	text-shadow:
+    -1px -1px 0em #ff420a,
+    -2px -2px 0em #ff420a,
+    -3px -3px 0em #ff420a,
+    -4px -4px 0em #ff420a,
+    -5px -5px 0em #ff420a,
+    -6px -6px 0em #ff420a,
+    -7px -7px 0em #ff420a,
+    -8px -8px 0em #ff420a;
+}
+@keyframes floating-text {
+	0% {
+	  transform: translateY(0px); /* ตำแหน่งเริ่มต้นของการเคลื่อนที่ */
+	}
+	50% {
+	  transform: translateY(20px); /* ตำแหน่งสูงสุดของการเคลื่อนที่ */
+	}
+	100% {
+	  transform: translateY(0px); /* ตำแหน่งสุดท้ายของการเคลื่อนที่ */
+	}
 }
 
 .pic-winner {
